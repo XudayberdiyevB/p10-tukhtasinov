@@ -20,7 +20,7 @@ class Student(models.Model):
 
 
 class StudentSponsor(models.Model):
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    sponsor_id = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
     amount = models.PositiveBigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
