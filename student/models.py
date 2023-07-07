@@ -1,7 +1,6 @@
 from django.db import models
 
 from sponsor.models import Sponsor
-from university.models import University
 
 
 class Student(models.Model):
@@ -13,7 +12,7 @@ class Student(models.Model):
     degree = models.CharField(max_length=50, choices=StudentTypes.choices)
     tuition_fee = models.FloatField(default=0)
     created_at = models.DateTimeField(auto_now=True)
-    university = models.ForeignKey("University", on_delete=models.CASCADE, related_name="students")
+    university = models.ForeignKey("common.University", on_delete=models.CASCADE, related_name="students")
 
     def __str__(self):
         return self.full_name
