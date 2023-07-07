@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from sponsor.models import Sponsor
+
+admin.site.register(Sponsor)
