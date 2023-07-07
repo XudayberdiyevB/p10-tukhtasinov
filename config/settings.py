@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     # My apps
     'sponsor'
+    'student',
+    'university'
 ]
 
 MIDDLEWARE = [
