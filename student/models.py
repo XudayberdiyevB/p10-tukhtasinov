@@ -1,4 +1,6 @@
 from django.db import models
+
+from sponsor.models import Sponsor
 from university.models import University
 
 
@@ -15,3 +17,10 @@ class Student(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+class StudentSponsor(models.Model):
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+    sponsor_id = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
+    amount = models.PositiveBigIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
