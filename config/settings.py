@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_yasg",
 
->>>>>>> config/settings.py
     # Local apps
     "common",
     "users",
@@ -159,6 +158,7 @@ SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}},
     "LOGIN_URL": "rest_framework:login",
     "LOGOUT_URL": "rest_framework:logout",
+}
 
 REST_USE_JWT = True
 
