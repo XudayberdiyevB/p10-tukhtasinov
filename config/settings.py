@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_yasg",
 
+>>>>>>> config/settings.py
     # Local apps
     "common",
     "users",
