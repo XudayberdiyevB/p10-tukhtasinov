@@ -3,8 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Sponsor(models.Model):
-
-    class StatusChoices(models.Choices):
+    class StatusChoices(models.TextChoices):
         NEW = 'new', _('New')
         IN_PROCESS = 'in_process', _('In process')
         CONFIRMED = 'confirmed', _('Confirmed')
