@@ -2,5 +2,6 @@
 .env
 .idea
 .coverage
+.vscode
 htmlcov
 __pycache__

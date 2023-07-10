@@ -15,9 +15,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Metsenat API system by HACKER",
+        default_version="modul-8",
+        description="Metsenat  API",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="naimov.bunyod2021@gmail.com"),
+        license=openapi.License(name="PDP License"),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+)
+
+swagger_urls = [
+    re_path(r"^swagger/$", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
+    re_path(r"^swagger(?P<format>\.json|\.yaml)$", schema_view.without_ui(cache_timeout=0), name="schema-json"),
+    re_path(r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+]
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('sponsor/', include('sponsor.urls'), name='sponsor'),
+    path("students/", include('student.urls'))
+    path("sponsors/", include("sponsor.urls")),
+    path("users/", include("users.urls")),
 ]
+
+urlpatterns += swagger_urls

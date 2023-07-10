@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
 
@@ -13,13 +14,13 @@ class Sponsor(models.Model):
     phone = models.CharField(max_length=30)
     amount = models.PositiveBigIntegerField()
     is_organization = models.BooleanField()
-    status = models.CharField(max_length=30, choices=StatusChoices.choices)
+    status = models.CharField(max_length=30, choices=StatusChoices.choices, default=StatusChoices.NEW)
     created_at = models.DateTimeField(auto_now_add=True)
-    organization_name = models.CharField(max_length=250)
+    organization_name = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.full_name
 
     @property
     def spend_money(self):
-        return self.students.aggregate(spend_money=sum("amount")).get("spend_money")
+        return self.students.aggregate(spent_money=Sum("amount")).get("spend_money")
