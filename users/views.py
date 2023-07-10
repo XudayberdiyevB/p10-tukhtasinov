@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from rest_framework import generics
 from rest_framework.response import Response
 
-from users.serializers import UserLoginSerializer
+from users.serializers import UserLoginSerializer, UserSerializer
 
 
 class UserLoginView(generics.GenericAPIView):
@@ -12,7 +12,11 @@ class UserLoginView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        user = serializer.validated_data['user']
+        user = serializer.validated_data["user"]
         login(request, user)
+        tokens = serializer.validated_data["tokens"]
+        user_data = UserSerializer(user).data
 
-        return Response(serializer.validated_data['tokens'])
+        response_data = {"tokens": tokens, "user": user_data}
+
+        return Response(response_data)
