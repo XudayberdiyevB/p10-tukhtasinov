@@ -4,7 +4,12 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 
 from sponsor.models import Sponsor
-from sponsor.serializers import SponsorSerializer
+from sponsor.serializers import SponsorSerializer, SponsorDetailSerializers
+
+
+class SponsorDetailView(generics.RetrieveAPIView):
+    queryset = Sponsor.objects.all()
+    serializer_class = SponsorDetailSerializers
 
 
 class SponsorView(generics.ListAPIView):
