@@ -23,6 +23,5 @@ class TestUser:
 
         url = reverse("login")
         response = client.post(url, data=data)
-        print(response.data)
 
         assert response.status_code == 200
