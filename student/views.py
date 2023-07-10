@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
 
 from student.serializers import StudentSerializer
-from paginators import CustomPageNumberPagination
+from paginations import CustomPageNumberPagination
 from student.models import Student
 
 
