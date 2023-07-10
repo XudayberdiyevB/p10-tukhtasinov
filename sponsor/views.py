@@ -4,18 +4,23 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 
 from sponsor.models import Sponsor
-from sponsor.serializers import SponsorSerializer
+from sponsor.serializers import SponsorListSerializer, SponsorCreateSerializer, SponsorDetailSerializer
 
 
-class SponsorView(generics.ListAPIView):
+class SponsorListCreateView(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
-    serializer_class = SponsorSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return SponsorCreateSerializer
+        return SponsorListSerializer
 
 
-class SponsorCreateAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = SponsorSerializer(data=request.data)
+class SponsorDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Sponsor.objects.order_by("-created_at")
 
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=HTTP_201_CREATED)
+    def get_serializer_class(self):
+        if self.request.method in ['POST', 'PATCH']:
+            return SponsorDetailSerializer
+        return SponsorDetailSerializer
+

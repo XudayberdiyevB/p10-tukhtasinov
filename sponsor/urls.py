@@ -1,7 +1,8 @@
 from django.urls import path
-from sponsor.views import SponsorView, SponsorCreateAPIView
+
+from sponsor.views import SponsorListCreateView, SponsorDetailView
 
 urlpatterns = [
-    path("", SponsorView.as_view(), name='sponsors-api'),
-    path("", SponsorCreateAPIView.as_view(), name="sponsor-create")
+    path('', SponsorListCreateView.as_view(), name='sponsor_list_create'),
+    path('<int:pk>', SponsorDetailView.as_view(), name='sponsor_detail')
 ]
