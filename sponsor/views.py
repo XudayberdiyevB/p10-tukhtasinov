@@ -4,7 +4,7 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 
 from sponsor.models import Sponsor
-from sponsor.serializers import SponsorSerializer, SponsorDetailSerializers
+from sponsor.serializers import SponsorDetailSerializers, SponsorListSerializer
 
 
 class SponsorDetailView(generics.RetrieveAPIView):
@@ -14,7 +14,7 @@ class SponsorDetailView(generics.RetrieveAPIView):
 
 class SponsorView(generics.ListAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
-    serializer_class = SponsorSerializer
+    serializer_class = SponsorListSerializer
 
 
 class SponsorCreateAPIView(APIView):

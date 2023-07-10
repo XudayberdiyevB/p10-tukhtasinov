@@ -53,8 +53,7 @@ INSTALLED_APPS = [
     "common",
     "users",
     "sponsor",
-    "student",
-    'rest_framework'
+    "student"
 ]
 
 MIDDLEWARE = [
@@ -155,9 +154,7 @@ REST_FRAMEWORK = {
 SITE_ID = 1
 
 SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}},
-    "LOGIN_URL": "rest_framework:login",
-    "LOGOUT_URL": "rest_framework:logout",
+    "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}}
 }
 
 REST_USE_JWT = True

@@ -4,13 +4,12 @@ from student.models import Student
 
 
 class StudentSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-
     class Meta:
+        model = Student
         fields = (
             'full_name',
             'degree',
             'tuition_fee',
             'created_at',
             'university'
-            )
+        )
