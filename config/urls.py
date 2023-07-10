@@ -41,12 +41,9 @@ swagger_urls = [
 ]
 urlpatterns = [
     path("admin/", admin.site.urls),
-<<<<<<< config/urls.py
     path("", include('student.urls'))
-=======
     path("sponsors/", include("sponsor.urls")),
     path("users/", include("users.urls")),
->>>>>>> config/urls.py
 ]
 
 urlpatterns += swagger_urls
