@@ -19,3 +19,7 @@ class Sponsor(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    @property
+    def spent_money(self):
+        return self.students.aggregate(spent_money=sum("amount")).get("spent_money")
