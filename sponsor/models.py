@@ -21,5 +21,5 @@ class Sponsor(models.Model):
         return self.full_name
 
     @property
-    def spent_money(self):
+    def spend_money(self):
         return self.students.aggregate(spent_money=sum("amount")).get("spent_money")
