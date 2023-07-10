@@ -1,8 +1,4 @@
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED
-from rest_framework.views import APIView
-
 from sponsor.models import Sponsor
 from sponsor.serializers import SponsorListSerializer, SponsorCreateSerializer, SponsorDetailSerializer
 
