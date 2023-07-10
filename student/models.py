@@ -7,7 +7,7 @@ class Student(models.Model):
     class StudentTypes(models.TextChoices):
         BACHELOR = "bachelor"
         MASTER = "master"
-    
+
     full_name = models.CharField(max_length=100)
     degree = models.CharField(max_length=50, choices=StudentTypes.choices)
     tuition_fee = models.FloatField(default=0)
