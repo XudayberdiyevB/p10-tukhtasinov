@@ -20,6 +20,6 @@ class Student(models.Model):
 
 class StudentSponsor(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
+    sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, related_name="students")
     amount = models.PositiveBigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)

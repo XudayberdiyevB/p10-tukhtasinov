@@ -1,8 +1,15 @@
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 
-from .serializers import SponsorSerializer
+from sponsor.models import Sponsor
+from sponsor.serializers import SponsorSerializer
+
+
+class SponsorView(generics.ListAPIView):
+    queryset = Sponsor.objects.order_by("-created_at")
+    serializer_class = SponsorSerializer
 
 
 class SponsorCreateAPIView(APIView):
