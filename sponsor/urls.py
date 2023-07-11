@@ -1,10 +1,10 @@
 from django.urls import path
 
-from sponsor.views import SponsorCreateAPIView, SponsorDetailView, SponsorView
-
+from sponsor.views import SponsorCreateAPIView, SponsorDetailView, SponsorView, SponsorMoneyDashboard
 
 urlpatterns = [
     path("", SponsorView.as_view(), name="sponsors-api"),
-    path("", SponsorCreateAPIView.as_view(), name="sponsor-create"),
-    path("sponsor_detail/", SponsorDetailView.as_view(), name="sponsor-detail-api"),
+    path("create/", SponsorCreateAPIView.as_view(), name="sponsor-create"),
+    path("detail/", SponsorDetailView.as_view(), name="sponsor-detail-api"),
+    path('dashboard/', SponsorMoneyDashboard.as_view(), name="sponsor-dashboard")
 ]
