@@ -5,3 +5,6 @@
 .vscode
 htmlcov
 __pycache__
+/venv
+/student/migrations/0002_alter_studentsponsor_sponsor.py
+/users/migrations/0002_alter_user_first_name_alter_user_last_name_and_more.py
