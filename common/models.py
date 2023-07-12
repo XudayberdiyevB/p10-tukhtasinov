@@ -11,7 +11,3 @@ class TimestampModel(models.Model):
 
 class University(TimestampModel):
     name = models.CharField(max_length=200)
-
-
-class Foo:
-    pass

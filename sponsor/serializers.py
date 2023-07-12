@@ -6,7 +6,7 @@ from sponsor.models import Sponsor
 class SponsorListSerializer(serializers.Serializer):
     class Meta:
         model = Sponsor
-        fields = ('id', 'full_name', 'phone', 'amount', 'spend_money', 'created_at', 'status')
+        fields = ("id", "full_name", "phone", "amount", "spend_money", "created_at", "status")
 
 
 class SponsorCreateSerializer(serializers.ModelSerializer):
@@ -20,3 +20,4 @@ class SponsorDetailSerializer(serializers.ModelSerializer):
         model = Sponsor
         fields = ('id', 'full_name', 'phone', 'amount', 'is_organization', 'status', 'created_at', 'organization_name')
         read_only = 'id'
+
