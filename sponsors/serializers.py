@@ -3,7 +3,7 @@ from rest_framework import serializers
 from sponsors.models import Sponsor
 
 
-class SponsorListSerializer(serializers.Serializer):
+class SponsorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsor
         fields = ("id", "full_name", "phone", "amount", "spend_money", "created_at", "status")
