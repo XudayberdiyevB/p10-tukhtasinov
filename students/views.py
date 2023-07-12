@@ -12,8 +12,12 @@ from .models import Student
 
 class StudentListCreateView(ListAPIView):
     queryset = Student.objects.all()
-    serializer_class = StudentListCreateSerializer
     pagination_class = CustomPageNumberPagination
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return StudentListCreateSerializer
+        return StudentListCreateSerializer
 
 
 class StudentsAndSponsorsCountApi(APIView):
