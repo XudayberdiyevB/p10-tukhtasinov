@@ -1,21 +1,18 @@
 from django.db.models import Sum
-from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from paginations import CustomPageNumberPagination
-from sponsors.models import Sponsor
+from sponsors.filters import SponsorFilter
 from sponsors.serializers import (
     SponsorCreateSerializer,
     SponsorDetailSerializer,
     SponsorListSerializer,
 )
 from students.models import Student, StudentSponsor, Sponsor
-from student.models import StudentSponsor, Student
-from sponsor.serializers import SponsorDetailSerializer, SponsorListSerializer, SponsorCreateSerializer
-from sponsor.filter import SponsorFilter
 
 
 class SponsorListCreateView(generics.ListCreateAPIView):

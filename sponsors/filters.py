@@ -1,5 +1,6 @@
 from django_filters import rest_framework as filters
-from sponsor.models import Sponsor
+
+from sponsors.models import Sponsor
 
 
 class SponsorFilter(filters.FilterSet):
