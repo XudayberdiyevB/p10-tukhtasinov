@@ -22,7 +22,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Metsenat API system by HACKER",
+        title="Metsenat API system by P10",
         default_version="modul-8",
         description="Metsenat  API",
         terms_of_service="https://www.google.com/policies/terms/",
