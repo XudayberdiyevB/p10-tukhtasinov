@@ -23,3 +23,4 @@ class StudentSponsor(models.Model):
     sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, related_name="students")
     amount = models.PositiveBigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+
