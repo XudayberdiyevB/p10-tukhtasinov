@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.http import JsonResponse
 from django.utils.dates import MONTHS
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
@@ -15,7 +15,7 @@ from students.serializers import StudentSerializer
 from .models import Student
 
 
-class StudentView(ListAPIView):
+class StudentsListView(ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     pagination_class = CustomPageNumberPagination
