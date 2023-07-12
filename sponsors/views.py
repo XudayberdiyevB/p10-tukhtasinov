@@ -6,21 +6,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from paginations import CustomPageNumberPagination
-from sponsors.models import Sponsor
+from sponsors.filters import SponsorFilter
 from sponsors.serializers import (
     SponsorCreateSerializer,
     SponsorDetailSerializer,
     SponsorListSerializer,
 )
-from students.models import Student, StudentSponsor
+from students.models import Student, StudentSponsor, Sponsor
 
 
 class SponsorListCreateView(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
-    filterset_fields = ("full_name", "phone", "organization_name")
-    ordering_fields = ("id", "full_name", "created_at")
-    search_fields = ("full_name", "created_at", "phone", "organization_at")
+    filterset_class = SponsorFilter
+    ordering_fields = ("id", "full_name", 'created_at')
+    search_fields = ("full_name", "created_at", "phone", 'organization_at')
     pagination_class = CustomPageNumberPagination
 
     def get_serializer_class(self):
