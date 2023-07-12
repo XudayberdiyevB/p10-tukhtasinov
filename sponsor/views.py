@@ -4,17 +4,17 @@ from rest_framework import generics
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
-
 from paginations import CustomPageNumberPagination
-
 from sponsor.models import Sponsor
 from sponsor.serializers import SponsorDetailSerializer, SponsorListSerializer, SponsorCreateSerializer
 from student.models import StudentSponsor, Student
+from sponsor.filter import SponsorFilter
 
 
 class SponsorListCreateView(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
+    filterset_class = SponsorFilter
     filterset_fields = ("phone", "organization_name")
     ordering_fields = ("id", "full_name", 'created_at')
     search_fields = ("full_name", "created_at", "phone", 'organization_at')
