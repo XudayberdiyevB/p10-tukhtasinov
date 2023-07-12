@@ -1,11 +1,27 @@
 from django.contrib.auth import login
-from rest_framework import generics
+from django.contrib.auth.hashers import make_password
+from rest_framework import generics, status
 from rest_framework.response import Response
 
 from users.serializers import UserLoginSerializer, UserSerializer
 
 
-class UserLoginView(generics.GenericAPIView):
+class UserRegisterAPIView(generics.CreateAPIView):
+    serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        password = serializer.validated_data["password"]
+        hashed_password = make_password(password)
+        serializer.save(password=hashed_password)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class UserLoginAPIView(generics.GenericAPIView):
     serializer_class = UserLoginSerializer
 
     def post(self, request, *args, **kwargs):
@@ -20,3 +36,4 @@ class UserLoginView(generics.GenericAPIView):
         response_data = {"tokens": tokens, "user": user_data}
 
         return Response(response_data)
+
