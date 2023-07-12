@@ -1,13 +1,20 @@
 from django.db.models import Sum
-from requests import Response
 from rest_framework import generics
-from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from paginations import CustomPageNumberPagination
-from sponsor.models import Sponsor
-from sponsor.serializers import SponsorDetailSerializer, SponsorListSerializer, SponsorCreateSerializer
+from sponsors.models import Sponsor
+from sponsors.serializers import (
+    SponsorCreateSerializer,
+    SponsorDetailSerializer,
+    SponsorListSerializer,
+)
+from students.models import Student, StudentSponsor, Sponsor
 from student.models import StudentSponsor, Student
+from sponsor.serializers import SponsorDetailSerializer, SponsorListSerializer, SponsorCreateSerializer
 from sponsor.filter import SponsorFilter
 
 
@@ -32,13 +39,9 @@ class SponsorDetailView(generics.RetrieveAPIView):
 
 class SponsorMoneyDashboard(APIView):
     def get(self, request, *args, **kwargs):
-        paid_amount = StudentSponsor.objects.aggregate(paid_amount=Sum('amount')).get('paid_amount') or 0
-        requested_amount = Student.objects.aggregate(requested_amount=Sum('tuition_fee')).get('requested_amount') or 0
+        paid_amount = StudentSponsor.objects.aggregate(paid_amount=Sum("amount")).get("paid_amount") or 0
+        requested_amount = Student.objects.aggregate(requested_amount=Sum("tuition_fee")).get("requested_amount") or 0
         amount_tobe_paid = requested_amount - paid_amount
-        data = {
-            'paid_amount': paid_amount,
-            'requested_amount': requested_amount,
-            'amount_tobe_paid': amount_tobe_paid
-        }
+        data = {"paid_amount": paid_amount, "requested_amount": requested_amount, "amount_tobe_paid": amount_tobe_paid}
 
         return Response(data)

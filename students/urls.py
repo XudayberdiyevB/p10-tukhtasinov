@@ -1,8 +1,9 @@
 from django.urls import path
 
-from student.views import StudentView, StudentsAndSponsorsCountApi
+from students.views import StudentView, StudentsAndSponsorsCountApi
 
-app_name = "student"
+
+app_name = "students"
 
 urlpatterns = [
     path("", StudentView.as_view(), name="students_list"),
