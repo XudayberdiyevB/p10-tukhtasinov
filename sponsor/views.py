@@ -15,7 +15,6 @@ class SponsorListCreateView(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filterset_class = SponsorFilter
-    filterset_fields = ("phone", "organization_name")
     ordering_fields = ("id", "full_name", 'created_at')
     search_fields = ("full_name", "created_at", "phone", 'organization_at')
     pagination_class = CustomPageNumberPagination
