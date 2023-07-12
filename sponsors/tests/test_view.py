@@ -5,7 +5,7 @@ from django.urls import reverse
 @pytest.mark.django_db
 class TestApplicationFormView:
     def test_create_application_form_true(self, client):
-        url = reverse("sponsor-create")
+        url = reverse("sponsors-create")
         data = {
             "id": 1,
             "full_name": "xx xx",
@@ -19,7 +19,7 @@ class TestApplicationFormView:
         assert response.status_code == 201
 
     def test_create_application_form_false(self, client):
-        url = reverse("sponsor-create")
+        url = reverse("sponsors-create")
         data = {
             "id": 1,
             "full_name": "xx xx",

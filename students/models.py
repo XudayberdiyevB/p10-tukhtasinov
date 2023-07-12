@@ -1,6 +1,6 @@
 from django.db import models
 
-from sponsor.models import Sponsor
+from sponsors.models import Sponsor
 
 
 class Student(models.Model):

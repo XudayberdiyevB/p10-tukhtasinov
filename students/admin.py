@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Sponsor, Student, StudentSponsor
+from .models import Student, StudentSponsor
 
 
 admin.site.register(Student)
