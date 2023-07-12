@@ -1,18 +1,21 @@
 from django.db.models import Sum
+from requests import Response
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.views import APIView
+
 from paginations import CustomPageNumberPagination
 
 from sponsor.models import Sponsor
-from sponsor.serializers import SponsorDetailSerializers, SponsorListSerializer, SponsorCreateSerializer
+from sponsor.serializers import SponsorDetailSerializer, SponsorListSerializer, SponsorCreateSerializer
 from student.models import StudentSponsor, Student
 
 
 class SponsorListCreateView(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
-    filterset_fields = ("full_name", "phone", "organization_name")
+    filterset_fields = ("phone", "organization_name")
     ordering_fields = ("id", "full_name", 'created_at')
     search_fields = ("full_name", "created_at", "phone", 'organization_at')
     pagination_class = CustomPageNumberPagination
@@ -25,7 +28,7 @@ class SponsorListCreateView(generics.ListCreateAPIView):
 
 class SponsorDetailView(generics.RetrieveAPIView):
     queryset = Sponsor.objects.all()
-    serializer_class = SponsorDetailSerializers
+    serializer_class = SponsorDetailSerializer
 
 
 class SponsorMoneyDashboard(APIView):
