@@ -1,14 +1,12 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 from rest_framework import generics, status
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
 
 from users.serializers import UserLoginSerializer, UserSerializer
 
 
-class UserRegisterView(generics.CreateAPIView):
+class UserRegisterAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
     def perform_create(self, serializer):
@@ -24,18 +22,18 @@ class UserRegisterView(generics.CreateAPIView):
 
 
 class UserLoginAPIView(generics.GenericAPIView):
-    permission_classes = (AllowAny,)
     serializer_class = UserLoginSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        user = authenticate(
-            username=serializer.validated_data["username"], password=serializer.validated_data["password"]
-        )
-        if user:
-            refresh = RefreshToken.for_user(user)
-            return Response({"access_token": str(refresh.access_token)})
-        else:
-            return Response({"error": "Incorrect username or password"}, status=status.HTTP_400_BAD_REQUEST)
+        user = serializer.validated_data["user"]
+        login(request, user)
+        tokens = serializer.validated_data["tokens"]
+        user_data = UserSerializer(user).data
+
+        response_data = {"tokens": tokens, "user": user_data}
+
+        return Response(response_data)
+
