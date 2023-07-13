@@ -46,7 +46,7 @@ urlpatterns = [
     path("sponsors/", include("sponsors.urls")),
     path("users/", include("users.urls")),
     # common
-    path('', include('common.urls')),
+    path("", include("common.urls")),
 ]
 
 urlpatterns += swagger_urls

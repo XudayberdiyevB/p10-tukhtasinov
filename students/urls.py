@@ -1,6 +1,6 @@
 from django.urls import path
 
-from students.views import StudentsListView, StudentsAndSponsorsCountApi
+from students.views import StudentsAndSponsorsCountApi, StudentsListView
 
 
 app_name = "students"

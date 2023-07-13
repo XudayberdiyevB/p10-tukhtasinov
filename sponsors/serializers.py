@@ -20,3 +20,10 @@ class SponsorDetailSerializer(serializers.ModelSerializer):
         model = Sponsor
         fields = ("id", "full_name", "phone", "amount", "is_organization", "status", "created_at", "organization_name")
         read_only = "id"
+
+
+class SponsorUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sponsor
+        fields = ("id", "full_name", "phone", "status", "amount", "organization_name")
+        read_only = ("id",)
