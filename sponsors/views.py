@@ -9,9 +9,8 @@ from paginations import CustomPageNumberPagination
 from sponsors.filters import SponsorFilter
 from sponsors.serializers import (
     SponsorCreateSerializer,
-    SponsorDetailSerializer,
     SponsorListSerializer,
-    SponsorUpdateSerializer,
+    SponsorRetrieveUpdateDestroySerializer,
 )
 from students.models import Sponsor, Student, StudentSponsor
 
@@ -30,14 +29,9 @@ class SponsorListCreateView(generics.ListCreateAPIView):
         return SponsorListSerializer
 
 
-class SponsorDetailView(generics.RetrieveAPIView):
+class SponsorRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Sponsor.objects.all()
-    serializer_class = SponsorDetailSerializer
-
-
-class SponsorUpdateView(generics.UpdateAPIView):
-    queryset = Sponsor.objects.all()
-    serializer_class = SponsorUpdateSerializer
+    serializer_class = SponsorRetrieveUpdateDestroySerializer
 
 
 class SponsorMoneyDashboard(APIView):

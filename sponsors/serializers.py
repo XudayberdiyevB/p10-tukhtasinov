@@ -15,14 +15,7 @@ class SponsorCreateSerializer(serializers.ModelSerializer):
         fields = ("id", "full_name", "phone", "amount", "is_organization", "organization_name")
 
 
-class SponsorDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Sponsor
-        fields = ("id", "full_name", "phone", "amount", "is_organization", "status", "created_at", "organization_name")
-        read_only = "id"
-
-
-class SponsorUpdateSerializer(serializers.ModelSerializer):
+class SponsorRetrieveUpdateDestroySerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsor
         fields = ("id", "full_name", "phone", "status", "amount", "organization_name")
