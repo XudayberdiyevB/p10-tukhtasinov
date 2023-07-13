@@ -31,3 +31,8 @@ class TestApplicationFormView:
 
         response = client.post(url, data=data)
         assert response.status_code == 201
+
+    def test_sponsor_money_dashboard(self, client):
+        url = reverse("sponsors-dashboard")
+        response = client.get(url)
+        assert response.status_code == 200
