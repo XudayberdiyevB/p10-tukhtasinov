@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
 from sponsors.models import Sponsor
@@ -19,9 +20,19 @@ class Student(models.Model):
     def __str__(self):
         return self.full_name
 
+    @property
+    def total_sponsor_amount(self):
+        if self.sponsors:
+            total_amount = self.sponsors.aggregate(total_amount=Sum("amount"))
+            return total_amount.get("total_amount")
+        return 0
+
 
 class StudentSponsor(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="sponsors")
     sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, related_name="students")
     amount = models.PositiveBigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.sponsor}-> {self.student}"

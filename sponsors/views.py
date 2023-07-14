@@ -12,15 +12,15 @@ from sponsors.serializers import (
     SponsorDetailSerializer,
     SponsorListSerializer,
 )
-from students.models import Student, StudentSponsor, Sponsor
+from students.models import Sponsor, Student, StudentSponsor
 
 
 class SponsorListCreateView(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-created_at")
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filterset_class = SponsorFilter
-    ordering_fields = ("id", "full_name", 'created_at')
-    search_fields = ("full_name", "created_at", "phone", 'organization_at')
+    ordering_fields = ("id", "full_name", "created_at")
+    search_fields = ("full_name", "created_at", "phone", "organization_at")
     pagination_class = CustomPageNumberPagination
 
     def get_serializer_class(self):

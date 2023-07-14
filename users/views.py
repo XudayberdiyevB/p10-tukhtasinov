@@ -36,4 +36,3 @@ class UserLoginAPIView(generics.GenericAPIView):
         response_data = {"tokens": tokens, "user": user_data}
 
         return Response(response_data)
-
