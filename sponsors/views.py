@@ -44,7 +44,7 @@ class SponsorMoneyDashboard(APIView):
         return Response(data)
 
 
-class SponsorListForSelect(generics.ListCreateAPIView):
+class SponsorListForSelect(APIView):
     queryset = Sponsor.objects.order_by("-full_name")
     result = Sponsor.amount
 
