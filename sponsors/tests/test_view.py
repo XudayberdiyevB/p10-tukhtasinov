@@ -1,3 +1,4 @@
+import pytest
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
@@ -9,6 +10,41 @@ from sponsor.serializers import (
     SponsorDetailSerializer,
     SponsorListSerializer,
 )
+
+@pytest.mark.django_db
+class TestApplicationFormView:
+    def test_create_application_form_true(self, client):
+        url = reverse("sponsors-create")
+        data = {
+            "id": 1,
+            "full_name": "xx xx",
+            "phone": "+9987234354",
+            "amount": 34,
+            "is_organization": True,
+            "organization_name": "Book",
+        }
+
+        response = client.post(url, data=data)
+        assert response.status_code == 201
+
+    def test_create_application_form_false(self, client):
+        url = reverse("sponsors-create")
+        data = {
+            "id": 1,
+            "full_name": "xx xx",
+            "phone": "+9987234354",
+            "amount": 34,
+            "is_organization": False,
+            "organization_name": "Book",
+        }
+
+        response = client.post(url, data=data)
+        assert response.status_code == 201
+
+    def test_sponsor_money_dashboard(self, client):
+        url = reverse("sponsors-dashboard")
+        response = client.get(url)
+        assert response.status_code == 200
 
 
 class SponsorListCreateViewTest(TestCase):

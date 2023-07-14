@@ -11,3 +11,9 @@ class TimestampModel(models.Model):
 
 class University(TimestampModel):
     name = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name_plural = "Universities"
+
+    def __str__(self):
+        return self.name

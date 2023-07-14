@@ -20,9 +20,10 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
+
 schema_view = get_schema_view(
     openapi.Info(
-        title="Metsenat API system by HACKER",
+        title="Metsenat API system by P10",
         default_version="modul-8",
         description="Metsenat  API",
         terms_of_service="https://www.google.com/policies/terms/",
@@ -41,9 +42,11 @@ swagger_urls = [
 urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path("admin/", admin.site.urls),
-    path("students/", include('student.urls')),
-    path("sponsors/", include("sponsor.urls")),
+    path("students/", include("students.urls")),
+    path("sponsors/", include("sponsors.urls")),
     path("users/", include("users.urls")),
+    # common
+    path("", include("common.urls")),
 ]
 
 urlpatterns += swagger_urls
