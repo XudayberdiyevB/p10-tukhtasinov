@@ -15,6 +15,7 @@ from pathlib import Path
 
 import environ
 
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "django_filters",
     # Local apps
     "common",
     "users",
@@ -95,7 +97,7 @@ DATABASES = {
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PASSWORD"),
         "HOST": env("DB_HOST"),
-        "PORT": env('DB_PORT'),
+        "PORT": env("DB_PORT"),
     }
 }
 
@@ -154,6 +156,7 @@ SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}},
     "LOGIN_URL": "rest_framework:login",
     "LOGOUT_URL": "rest_framework:logout",
+    "DEEP_LINKING": True,
 }
 REST_USE_JWT = True
 
