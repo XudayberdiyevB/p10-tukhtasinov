@@ -46,7 +46,7 @@ class SponsorMoneyDashboard(APIView):
 
 class SponsorListForSelect(generics.ListCreateAPIView):
     queryset = Sponsor.objects.order_by("-full_name")
-    result = Sponsor.amount()
+    result = Sponsor.amount
 
     def get_serializer_class(self):
         if self.request.method == "POST":
