@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_yasg",
-    'django_filters',
+    "django_filters",
     # Local apps
     "common",
     "users",
@@ -156,6 +156,7 @@ SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}},
     "LOGIN_URL": "rest_framework:login",
     "LOGOUT_URL": "rest_framework:logout",
+    "DEEP_LINKING": True,
 }
 REST_USE_JWT = True
 

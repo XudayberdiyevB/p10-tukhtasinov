@@ -4,12 +4,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from sponsor.models import Sponsor
-from sponsor.serializers import (
-    SponsorCreateSerializer,
-    SponsorDetailSerializer,
-    SponsorListSerializer,
-)
+from sponsors.models import Sponsor
+from sponsors.serializers import SponsorCreateSerializer
+
 
 @pytest.mark.django_db
 class TestApplicationFormView:
@@ -91,7 +88,7 @@ class SponsorDetailViewTest(TestCase):
             organization_name="Test Organization",
         )
         self.url = reverse("sponsor_detail", kwargs={"pk": self.sponsor.pk})
-        self.serializer = SponsorDetailSerializer(instance=self.sponsor)
+        # self.serializer = SponsorDetailSerializer(instance=self.sponsor)  # noqa
 
     def test_retrieve_sponsor(self):
         response = self.client.get(self.url)
@@ -105,4 +102,4 @@ class SponsorMoneyDashboardTest(TestCase):
         self.url = reverse("sponsor-dashboard")
 
     def test_get_sponsor_money_dashboard(self):
-        response = self.client.get(self.url)
+        self.client.get(self.url)

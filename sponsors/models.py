@@ -5,9 +5,18 @@ from django.utils.translation import gettext_lazy as _
 
 class Sponsor(models.Model):
     class PaymentType(models.TextChoices):
-        cash = 'cash', _('Cash'),
-        card = 'card', _('Card'),
-        transfer = 'transfer', _('Transfer'),
+        cash = (
+            "cash",
+            _("Cash"),
+        )
+        card = (
+            "card",
+            _("Card"),
+        )
+        transfer = (
+            "transfer",
+            _("Transfer"),
+        )
 
     class StatusChoices(models.TextChoices):
         NEW = "new", _("New")

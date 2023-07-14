@@ -26,4 +26,4 @@ def test_serializer_phone_validation():
         "organization_name": "organization name",
     }
     serializer = SponsorCreateSerializer(data)
-    assert serializer.validate_phone(data.get('phone'))
+    assert serializer.validate_phone(data.get("phone"))
