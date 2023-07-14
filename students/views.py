@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 
 from paginations import CustomPageNumberPagination
 from sponsors.models import Sponsor
-from students.serializers import StudentSerializer
+from students.serializers import StudentDetailSerializer, StudentSerializer
 
 from .models import Student
 
@@ -47,3 +47,8 @@ class StudentListCreateView(generics.ListCreateAPIView):
         if self.request.method == "POST":
             return StudentSerializer
         return StudentSerializer
+
+
+class StudentDetailView(generics.RetrieveUpdateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentDetailSerializer
