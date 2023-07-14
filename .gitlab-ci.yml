@@ -28,7 +28,6 @@ test-job:
     POSTGRES_PASSWORD: $DB_PASSWORD
     POSTGRES_HOST_AUTH_METHOD: trust
   script:
-    - source ~/.virtualenvs/metsenat-runner/bin/activate
     - pip install -r requirements/dev.txt
     - pytest
   only:
