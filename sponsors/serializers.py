@@ -31,7 +31,7 @@ class SponsorCreateSerializer(serializers.ModelSerializer):
         )
 
 
-class SponsorDetailSerializer(serializers.ModelSerializer):
+class SponsorRetrieveUpdateDestroySerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsor
         fields = ("id", "full_name", "phone", 'payment_type', "amount", "is_organization", "status", "created_at",
