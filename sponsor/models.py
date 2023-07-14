@@ -12,8 +12,8 @@ class Sponsor(models.Model):
 
     full_name = models.CharField(max_length=250)
     phone = models.CharField(max_length=30)
-    amount = models.PositiveBigIntegerField()
-    is_organization = models.BooleanField()
+    amount = models.PositiveBigIntegerField(default=False)
+    is_organization = models.BooleanField(default=False)
     status = models.CharField(max_length=30, choices=StatusChoices.choices, default=StatusChoices.NEW)
     created_at = models.DateTimeField(auto_now_add=True)
     organization_name = models.CharField(max_length=250, null=True, blank=True)
