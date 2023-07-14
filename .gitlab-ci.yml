@@ -1,0 +1,44 @@
+image: python:3.9-buster
+
+stages:
+  - lint
+  - test
+  - deploy
+
+cache:
+    paths:
+      - ~/.cache/pip/
+
+lint-job:
+  stage: lint
+  script:
+    - pip install -r requirements/dev.txt
+    - make lint
+  only:
+    - main
+
+test-job:
+  stage: test
+  services:
+      - postgres:latest
+  variables:
+    DATABASE_HOST: postgres
+    POSTGRES_DB: $DB_NAME
+    POSTGRES_USER: $DB_USER
+    POSTGRES_PASSWORD: $DB_PASSWORD
+    POSTGRES_HOST_AUTH_METHOD: trust
+  script:
+    - source ~/.virtualenvs/metsenat-runner/bin/activate
+    - pip install -r requirements/dev.txt
+    - pytest
+  only:
+    - main
+
+deploy-job:
+  stage: deploy
+  environment: production
+  script:
+    - chmod 600 $ID_RSA
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd /var/www/metsenat-backend && bash <script>"
+  only:
+    - main
