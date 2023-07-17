@@ -42,3 +42,13 @@ class SponsorMoneyDashboard(APIView):
         data = {"paid_amount": paid_amount, "requested_amount": requested_amount, "amount_tobe_paid": amount_tobe_paid}
 
         return Response(data)
+
+
+class SponsorListForSelect(APIView):
+    queryset = Sponsor.objects.order_by("-full_name")
+    result = Sponsor.amount
+
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return SponsorListSerializer
+        return SponsorListSerializer
