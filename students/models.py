@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
-
 from sponsors.models import Sponsor
 
 
@@ -34,5 +33,7 @@ class StudentSponsor(models.Model):
     amount = models.PositiveBigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
         return f"{self.sponsor}-> {self.student}"
+
